@@ -733,6 +733,12 @@ spec:
         - name: huawei-csi-driver
           image: {{ required "Must provide the CSI controller service container image." .Values.images.huaweiCSIService }}
           imagePullPolicy: {{ .Values.huaweiImagePullPolicy }}
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+            privileged: true
           args:
             - "--endpoint=$(CSI_ENDPOINT)"
             - "--dr-endpoint=$(DRCSI_ENDPOINT)"
@@ -797,7 +803,6 @@ spec:
           name: log
         - hostPath:
             path: /etc/localtime
-            type: File
           name: host-time
 
 ---
