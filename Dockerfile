@@ -7,7 +7,7 @@ LABEL version="${VERSION}"
 LABEL maintainers="Huawei eSDK CSI development team"
 LABEL description="Kubernetes CSI Driver for Huawei Storage: $VERSION"
 
-RUN apk update && apk add --no-cache xfsprogs xfsprogs-extra findmnt blkid gcompat grep
+RUN apk update && apk add --no-cache xfsprogs xfsprogs-extra findmnt blkid gcompat grep lsblk
 ARG binary=./huawei-csi
 COPY ${binary} huawei-csi
 ENTRYPOINT ["/huawei-csi"]
